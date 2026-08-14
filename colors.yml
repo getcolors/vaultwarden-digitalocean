@@ -1,0 +1,71 @@
+# Desired state for vaultwarden-digitalocean. Non-secret values only.
+# Credentials belong in the gitignored .envrc.private as COLORS_PAR_* variables.
+# Never export COLORS_PAR_PROFILE: it selects this deployment's remote state.
+#
+# Required credentials:
+#   DigitalOcean   COLORS_PAR_DO_TOKEN
+#   Cloudflare     COLORS_PAR_CLOUDFLARE_API_TOKEN
+#   GitHub         COLORS_PAR_GITHUB_TOKEN
+#   Resend         COLORS_PAR_RESEND_API_KEY COLORS_PAR_RESEND_PASSWORD
+#   state in R2    COLORS_PAR_R2_ACCESS_KEY_ID COLORS_PAR_R2_SECRET_ACCESS_KEY
+#   backups in R2  COLORS_PAR_LITESTREAM_R2_ACCESS_KEY_ID
+#                  COLORS_PAR_LITESTREAM_R2_SECRET_ACCESS_KEY
+#   bootstrap      COLORS_PAR_VAULTWARDEN_ADMIN_TOKEN
+
+profile: vaultwarden-digitalocean
+workdir: .colors
+
+provider-compute: digitalocean
+provider-dns: cloudflare
+provider-smtp: resend
+provider-backend: r2
+
+# Preserve this guard in committed desired state. Destruction requires an
+# explicitly authorized one-run override; never edit this flag to bypass it.
+compute-prevent-destroy: true
+
+# --- Vaultwarden ------------------------------------------------------------
+
+vaultwarden-host: vault.bigconfig.space
+vaultwarden-image: ghcr.io/getcolors/vaultwarden:1.0.0
+vaultwarden-repo: getcolors/vaultwarden
+vaultwarden-signups-allowed: false
+
+# The package uses this interface only to send the initial invitation, then
+# leaves it disabled in converged state.
+vaultwarden-admin-enabled: false
+vaultwarden-owner-email: admin@bigconfig.space
+
+# The image pins Vaultwarden 1.35.4, Litestream 0.5.5, and Hivemind 1.1.0.
+# ONCE's Resend stages create notifications.bigconfig.space and pass its relay
+# settings to the container.
+
+# --- Litestream backups -----------------------------------------------------
+
+litestream-r2-bucket: vaultwarden
+litestream-r2-endpoint: https://319271fed8bc6d2d9059362be1165f37.eu.r2.cloudflarestorage.com
+litestream-r2-region: auto
+litestream-r2-prefix: vault.bigconfig.space
+litestream-retention: 720h
+litestream-snapshot-interval: 24h
+
+# Restore into an isolated temporary directory every Sunday and alert through
+# the configured Resend relay if verification fails.
+litestream-restore-check-oncalendar: Sun *-*-* 03:00:00
+
+# --- DigitalOcean -----------------------------------------------------------
+
+digitalocean-name: vaultwarden-digitalocean
+digitalocean-region: ams3
+# Smallest current ONCE-compatible class: 1 shared vCPU, 1 GiB RAM, 35 GiB SSD.
+digitalocean-size: s-1vcpu-1gb-35gb-intel
+digitalocean-image: ubuntu-24-04-x64
+# Existing account-level identifiers; replace the VPC placeholder during review
+# with the UUID of an ams3 VPC.
+digitalocean-vpc-uuid: b6938e67-dc83-11e8-a3da-3cfdfea9f0d8
+digitalocean-ssh-keys: "812184"
+
+# --- R2 state backend -------------------------------------------------------
+
+r2-bucket: tofu-state-319271fed8bc6d2d9059362be1165f37-eu
+r2-endpoint: https://319271fed8bc6d2d9059362be1165f37.eu.r2.cloudflarestorage.com
