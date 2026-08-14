@@ -36,7 +36,7 @@ vaultwarden-signups-allowed: false
 vaultwarden-admin-enabled: false
 vaultwarden-owner-email: admin@bigconfig.space
 
-# The image pins Vaultwarden 1.35.4, Litestream 0.5.5, and Hivemind 1.1.0.
+# The image pins Vaultwarden 1.35.4, Litestream 0.5.16, and Hivemind 1.1.0.
 # ONCE's Resend stages create notifications.bigconfig.space and pass its relay
 # settings to the container.
 
