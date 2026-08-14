@@ -63,7 +63,7 @@ digitalocean-image: ubuntu-24-04-x64
 # Existing account-level identifiers; replace the VPC placeholder during review
 # with the UUID of an ams3 VPC.
 digitalocean-vpc-uuid: b6938e67-dc83-11e8-a3da-3cfdfea9f0d8
-digitalocean-ssh-keys: "812184"
+digitalocean-ssh-keys: "58495393"
 
 # --- R2 state backend -------------------------------------------------------
 
