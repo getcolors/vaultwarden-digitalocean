@@ -33,7 +33,7 @@ vaultwarden-signups-allowed: false
 # The package uses this interface only to send the initial invitation, then
 # leaves it disabled in converged state.
 vaultwarden-admin-enabled: false
-vaultwarden-owner-email: admin@bigconfig.space
+vaultwarden-owner-email: alberto.miorin@gmail.com
 
 # The image pins Vaultwarden 1.35.4, Litestream 0.5.16, and Hivemind 1.1.0.
 # ONCE's Resend stages create notifications.bigconfig.space and pass its relay
