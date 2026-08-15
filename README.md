@@ -2,7 +2,9 @@
 
 Desired state for `https://vault.bigconfig.space`: Vaultwarden on a small
 DigitalOcean ONCE server in Amsterdam, with Cloudflare HTTPS, Resend email and
-continuous Litestream replication to the existing `vaultwarden` R2 bucket.
+continuous Litestream replication to the existing `vaultwarden` R2 bucket. It
+consumes the official public image directly and needs no GitHub repository or
+deployment credential.
 
 ```sh
 ./green build

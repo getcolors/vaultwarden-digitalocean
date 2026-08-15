@@ -4,8 +4,9 @@
 
 Desired state for one Vaultwarden deployment at `vault.bigconfig.space` on a
 DigitalOcean Droplet in Amsterdam. Behavior lives in `../vaultwarden`, which
-reuses `../once` for infrastructure, DNS, Resend, ONCE installation and the
-application deploy key.
+reuses `../once` for infrastructure, DNS, Resend and ONCE installation. This
+deployment consumes the official public image, so it deliberately publishes no
+GitHub deployment credentials.
 
 Tracked source consists of `colors.yml`, the copied `green` launcher and Package
 Skill payload, secret-free `.envrc`, toolchain files, and documentation.
