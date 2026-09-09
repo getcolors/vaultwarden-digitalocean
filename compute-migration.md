@@ -1,6 +1,6 @@
 # Shared compute migration
 
-Installed `getcolors/vaultwarden` revision `336a76bb765d87aac3754b6fe7bc291a362ae886`. Root launchers match the
+Installed `getcolors/vaultwarden` revision `c1764279ee8f7ad9eb83ed36f1cc2acf34bf9ff6`. Root launchers match the
 installed skill payloads from a verified Skills CLI installation.
 This remains a manual installation, with no invented lockfile.
 
@@ -27,3 +27,5 @@ Configuration changes:
 The external provider key reference is preserved. Verify that the operator
 SSH agent can authenticate, or configure ssh-private-key-path when an explicit
 identity is needed, before live application access.
+
+Published lifecycle update: validated retired compute stops repeated delete before cleanup; DNS and SMTP finish before compute retirement. Credential and destruction guards remain enforced. Desired state is unchanged.
