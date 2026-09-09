@@ -4,7 +4,8 @@
 
 Desired state for one Vaultwarden deployment at `vault.bigconfig.space` on a
 DigitalOcean Droplet in Amsterdam. Behavior lives in `../vaultwarden`, which
-reuses `../once` for infrastructure, DNS, Resend and ONCE installation. This
+uses `../colors-compute` for compute and `../once` for DNS, Resend,
+and ONCE installation. This
 deployment consumes the official public image, so it deliberately publishes no
 GitHub deployment credentials.
 
